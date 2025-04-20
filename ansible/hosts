@@ -1,0 +1,5 @@
+[app]
+ches-app ansible_host=44.201.46.144
+
+[monitoring]
+ches-monitoring ansible_host=monitoring.ches-it.com

@@ -1,0 +1,17 @@
+---
+- name: Create monitoring dirs
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /etc/monitoring
+    - /etc/monitoring/grafana
+    - /etc/monitoring/prometheus
+
+- name: Copy files
+  copy:
+    src: etc/monitoring/
+    dest: /etc/monitoring/
+
+- name: Start server
+  command: docker compose -f /etc/monitoring/compose.yaml up -d

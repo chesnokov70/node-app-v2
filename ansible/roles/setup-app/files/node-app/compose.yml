@@ -1,0 +1,29 @@
+services:
+  node-app:
+    build:
+      context: .
+    restart: always
+    networks:
+      - app
+    logging:
+      driver: "json-file"
+      options:
+        tag: "node-app"
+
+  nginx:
+    image: nginx
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - app
+    volumes:
+      - ./nginx/node-app.conf:/etc/nginx/conf.d/default.conf
+    logging:
+      driver: "json-file"
+      options:
+        tag: "node-app-nginx"
+
+networks:
+  app:
+    name: app

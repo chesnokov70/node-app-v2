@@ -1,0 +1,21 @@
+---
+- name: Create app dir
+  file:
+    path: /var/www/app
+    state: directory
+
+- name: Copy app files
+  copy:
+    src: node-app/
+    dest: /var/www/app
+
+- name: Run app
+  command: docker compose -f /var/www/app/compose.yml up -d
+
+- name: Copy promtail files
+  copy:
+    src: promtail/
+    dest: /var/www/app-promtail
+
+- name: Run promtail
+  command: docker compose -f /var/www/app-promtail/compose.yml up -d

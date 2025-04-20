@@ -1,0 +1,8 @@
+---
+packages:
+  - gnupg2
+  - apt-transport-https
+  - ca-certificates
+  - wget
+  - curl
+  - software-properties-common

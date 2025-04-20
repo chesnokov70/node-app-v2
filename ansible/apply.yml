@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: true #Executes tasks with sudo privileges.
+  roles:
+    - install-docker
+
+- hosts: monitoring
+  become: true
+  roles:
+    - setup-monitoring-server
+
+- hosts: app
+  become: true
+  roles:
+    - setup-app

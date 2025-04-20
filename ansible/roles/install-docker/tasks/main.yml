@@ -1,0 +1,31 @@
+---
+- name: Install dependies
+  apt:
+    name: "{{ packages }}"
+    state: latest
+    update_cache: yes
+
+- name: Add docker key
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add repo
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable'
+    state: present
+    filename: docker
+    update_cache: yes
+
+- name: Install docker engine
+  apt:
+    name: docker-ce
+    state: latest
+    update_cache: yes
+  notify: restart docker
+
+- name: Add current user to docker group
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes  

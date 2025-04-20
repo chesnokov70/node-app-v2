@@ -1,0 +1,15 @@
+---
+route:
+  group_by: ['alertname']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 5m
+  receiver: 'telegram-api'
+receivers:
+  - name: 'telegram-api'
+    telegram_configs:
+    - bot_token: 'BOT-TOKEN'
+      api_url: 'https://api.telegram.org'
+      chat_id: CHAT-ID
+      parse_mode: ''
+      message: "🚨 Alertmanager 🚨\n--\n🔺 Alertname: {{ .GroupLabels.alertname}}\n🔺 Severity: {{ .CommonLabels.severity }}\n📌 {{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
