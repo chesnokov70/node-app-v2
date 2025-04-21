@@ -3,7 +3,22 @@ global:
   scrape_timeout: 10s
 
 scrape_configs:
-- job_name: prometheus
-  static_configs:
-  - targets:
-    - 127.0.0.1:9090
+  - job_name: prometheus
+    static_configs:
+      - targets:
+        - 127.0.0.1:9090
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: 
+        - 3.227.24.18:9100
+
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+rule_files:
+  - alert.rules.yml

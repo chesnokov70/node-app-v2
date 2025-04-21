@@ -39,7 +39,7 @@ services:
       - "9093:9093"
     restart: always
     volumes:
-      - ./alertmanager/alertmanager.yaml:/etc/alertmanager/alertmanager.yaml
+      - ./alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
 
 volumes:
   prom_data:

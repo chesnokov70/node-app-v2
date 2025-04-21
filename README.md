@@ -37,3 +37,18 @@ ansible-playbook setup_docker.yml -i inventory.ini --limit monitoring,app
 # scp /var/lib/jenkins/workspace/My_Lessons_Folder/node-app/docker-compose.tmpl root@${HOST}:/opt
 # scp /var/lib/jenkins/workspace/My_Lessons_Folder/node-app/promtail-config.yaml root@${HOST}:/opt 
 # rsync /var/lib/jenkins/workspace/My_Lessons_Folder/node-app/ root@${HOST}:/node-app
+#-----------------------------------------------------------------------------
+curl -XPOST http://monitoring.ches-it.com:9093/api/v2/alerts   -H 'Content-Type: application/json'   -d '[
+    {
+      "labels": {
+        "alertname": "Test_Alert",
+        "severity": "critical"
+      },
+      "annotations": {
+        "summary": "🚨 Это тестовое оповещение от Alertmanager-2"
+      },
+      "generatorURL": "http://monitoring.ches-it.com:9090"
+    }
+]'
+
+#-------------------------------------------------------------------------------------
